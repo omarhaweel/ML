@@ -14,12 +14,6 @@ ENV/
 # Jupyter Notebook
 .ipynb_checkpoints
 
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-
 # OS
 .DS_Store
 Thumbs.db
@@ -27,3 +21,16 @@ Thumbs.db
 # Data files (optional - uncomment if you don't want to track data)
 # data/
 
+# no images folder
+images/
+
+# no __pycache__ folder
+__pycache__/
+
+# no .DS_Store file
+.DS_Store
+
+# no .ipynb_checkpoints folder
+.ipynb_checkpoints/
+
+# no jupyter notebook checkpoints
