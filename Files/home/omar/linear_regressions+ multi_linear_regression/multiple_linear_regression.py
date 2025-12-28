@@ -14,7 +14,7 @@ y_train = np.array([460, 232, 178])
 def compute_cost(X, y, w, b):
     """
     Compute the cost function for multiple linear regression.
-    
+    This is the mean squared error cost function.
     Args:
         X (ndarray): Training examples (m, n)
         y (ndarray): Target values (m,)
@@ -47,18 +47,18 @@ def compute_gradient(X, y, w, b):
         tuple: (dj_db, dj_dw) - gradients with respect to b and w
     """
     m, n = X.shape  # (number of examples, number of features)
-    dj_dw = np.zeros((n,))
-    dj_db = 0.0
+    dj_dw = np.zeros((n,)) # this is the gradient of the cost with respect to w
+    dj_db = 0.0 # this is the gradient of the cost with respect to b
     
-    for i in range(m):
-        err = (np.dot(X[i], w) + b) - y[i]
-        for j in range(n):
-            dj_dw[j] = dj_dw[j] + err * X[i, j]
-        dj_db = dj_db + err
+    for i in range(m): # iterate over the training examples
+        err = (np.dot(X[i], w) + b) - y[i] # calculate the error between the predicted and actual values
+        for j in range(n): # iterate over the features
+            dj_dw[j] = dj_dw[j] + err * X[i, j] # calculate the gradient of the cost with respect to w
+        dj_db = dj_db + err # calculate the gradient of the cost with respect to b
     
-    dj_dw = dj_dw / m
-    dj_db = dj_db / m
-    return dj_db, dj_dw
+    dj_dw = dj_dw / m # average the gradient of the cost with respect to w
+    dj_db = dj_db / m # average the gradient of the cost with respect to b
+    return dj_db, dj_dw # return the gradients with respect to b and w
 
 
 def gradient_descent(X, y, w_in, b_in, alpha, num_iters, cost_function, gradient_function):
@@ -78,21 +78,21 @@ def gradient_descent(X, y, w_in, b_in, alpha, num_iters, cost_function, gradient
     Returns:
         tuple: (w, b, J_history) - final parameters and cost history
     """
-    J_history = []
-    w = copy.deepcopy(w_in)
-    b = b_in
+    J_history = [] # this is the history of the cost function
+    w = copy.deepcopy(w_in) # this is the initial value of w
+    b = b_in # this is the initial value of b
     
-    for i in range(num_iters):
-        dj_db, dj_dw = gradient_function(X, y, w, b)
-        w = w - alpha * dj_dw
-        b = b - alpha * dj_db
+    for i in range(num_iters): # iterate over the number of iterations
+        dj_db, dj_dw = gradient_function(X, y, w, b) # calculate the gradient of the cost with respect to b and w
+        w = w - alpha * dj_dw # update the value of w
+        b = b - alpha * dj_db # update the value of b
         
-        J_history.append(cost_function(X, y, w, b))
+        J_history.append(cost_function(X, y, w, b)) # append the cost to the history
         
-        if i % math.ceil(num_iters / 10) == 0:
+        if i % math.ceil(num_iters / 10) == 0: # print the cost every 10 iterations
             print(f"Iteration {i:4}: Cost {J_history[-1]:0.2e}")
     
-    return w, b, J_history
+    return w, b, J_history # return the final value of w, b and the history of the cost function
 
 
 # Initialize parameters
