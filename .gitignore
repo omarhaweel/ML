@@ -21,8 +21,8 @@ Thumbs.db
 # Data files (optional - uncomment if you don't want to track data)
 # data/
 
-# no images folder
-images/
+# no images folder in the whole project
+/images/
 
 # no __pycache__ folder
 __pycache__/
